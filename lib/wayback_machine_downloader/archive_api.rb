@@ -10,11 +10,9 @@ module ArchiveAPI
 	end
 
 	def parameters_for_api
-		parameters = "&fl=timestamp,original&gzip=false"
-    if @all
-      parameters += "&collapse=digest"
-    else
-      parameters += "&filter=statuscode:200&collapse=original"
+		parameters = "&fl=timestamp,original&gzip=false&collapse=digest"
+    unless @all
+      parameters += "&filter=statuscode:200"
     end
     if @from_timestamp and @from_timestamp != 0
       parameters += "&from=" + @from_timestamp.to_s
